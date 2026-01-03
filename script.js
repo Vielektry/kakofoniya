@@ -73,3 +73,122 @@
     moveOrphans();
   }
 })();
+
+
+/* ---- Global tooltip (render in <body> to avoid clipping by overflow) ---- */
+(function(){
+  const tip = document.getElementById('globalTooltip');
+  if(!tip) return;
+
+  const PAD = 10;   // gap between element and tooltip
+  const EDGE = 10;  // gap from viewport edges
+  let current = null;
+
+  function getContent(el){
+    // Prefer explicit attribute
+    const dt = el.getAttribute('data-tip');
+    if(dt) return dt;
+
+    // Fallback: reuse embedded tooltip HTML
+    const inner = el.querySelector('.hp-tooltip, .sv-tooltip');
+    if(inner) return inner.innerHTML;
+
+    return '';
+  }
+
+  function position(el){
+    const r = el.getBoundingClientRect();
+
+    // Tooltip size (requires it to be in DOM)
+    const w = tip.offsetWidth;
+    const h = tip.offsetHeight;
+
+    // Default: below, left-aligned
+    let left = r.left;
+    let top  = r.bottom + PAD;
+    let place = 'bottom';
+
+    // If doesn't fit below -> place above
+    if(top + h > window.innerHeight - EDGE){
+      top = r.top - PAD - h;
+      place = 'top';
+    }
+
+    // Clamp vertically
+    if(top < EDGE) top = EDGE;
+    if(top + h > window.innerHeight - EDGE) top = window.innerHeight - EDGE - h;
+
+    // Clamp horizontally
+    if(left + w > window.innerWidth - EDGE){
+      left = window.innerWidth - EDGE - w;
+    }
+    if(left < EDGE) left = EDGE;
+
+    tip.style.left = left + 'px';
+    tip.style.top  = top + 'px';
+    tip.dataset.place = place;
+
+    // Arrow X: target center, clamped inside tooltip
+    const targetMid = r.left + r.width / 2;
+    let arrowX = targetMid - left - 6; // 6 = half arrow square
+    arrowX = Math.max(18, Math.min(w - 18, arrowX));
+    tip.style.setProperty('--arrow-x', arrowX + 'px');
+  }
+
+  function show(el){
+    const html = getContent(el);
+    if(!html) return;
+
+    current = el;
+    tip.innerHTML = html;
+    tip.classList.add('show');
+    tip.setAttribute('aria-hidden','false');
+
+    position(el);
+  }
+
+  function hide(){
+    current = null;
+    tip.classList.remove('show');
+    tip.setAttribute('aria-hidden','true');
+  }
+
+  function findTarget(node){
+    return node && node.closest ? node.closest('.hpvalwrap, .svtipwrap, [data-tip]') : null;
+  }
+
+  document.addEventListener('mouseover', (e)=>{
+    const el = findTarget(e.target);
+    if(!el) return;
+    if(current === el) return;
+    show(el);
+  });
+
+  document.addEventListener('mouseout', (e)=>{
+    if(!current) return;
+    const from = findTarget(e.target);
+    if(from !== current) return;
+    const rel = e.relatedTarget;
+    if(rel && current.contains(rel)) return;
+    hide();
+  });
+
+  document.addEventListener('focusin', (e)=>{
+    const el = findTarget(e.target);
+    if(!el) return;
+    show(el);
+  });
+
+  document.addEventListener('focusout', (e)=>{
+    const el = findTarget(e.target);
+    if(el && el === current) hide();
+  });
+
+  window.addEventListener('scroll', ()=>{
+    if(current) position(current);
+  }, true);
+
+  window.addEventListener('resize', ()=>{
+    if(current) position(current);
+  });
+})();

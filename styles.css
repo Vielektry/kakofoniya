@@ -36,7 +36,7 @@ body{
   color: #e9e2d7;
 }
 a{color:inherit;}
-/* outer frame */
+
 .app{
   max-width: 920px;
   margin: 18px auto;
@@ -47,8 +47,10 @@ a{color:inherit;}
   box-shadow: 0 20px 60px var(--shadow);
   border: 1px solid rgba(109,40,217,.22);
   background: linear-gradient(180deg, rgba(0,0,0,.10), transparent);
+
+  overflow: hidden;
 }
-/* top bar */
+
 .topbar{
   display:flex;
   align-items:center;
@@ -67,12 +69,12 @@ a{color:inherit;}
   font-family: var(--serif);
   font-weight: 800;
   letter-spacing: .5px;
-  font-size: 22px;
+  font-size: 23px;
   color: var(--gold);
   text-shadow: 0 2px 0 rgba(0,0,0,.45);
 }
 .brand .sub{
-  font-size: 12px;
+  font-size: 13px;
   opacity: .9;
 }
 .charhead{
@@ -146,7 +148,7 @@ a{color:inherit;}
 }
 
 
-/* When sidebar is removed */
+
 .body.no-sidebar{
   grid-template-columns: 1fr;
 }
@@ -154,10 +156,10 @@ a{color:inherit;}
   display:none;
 }
 
-/* Stats moved into content */
+
 .stats-area{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.6fr; /* 1й/2й/3й/4й блок */
+  grid-template-columns: 1fr 1fr 1fr 1.6fr;
   gap: 18px;
   margin: 18px 0 26px;
 }
@@ -170,7 +172,7 @@ a{color:inherit;}
   }
 }
 
-/* Center short "empty" answers in tabs like Spells/Craft */
+
 .panel .answer{
   max-width: 900px;
   margin: 60px auto 0;
@@ -186,7 +188,7 @@ a{color:inherit;}
   color: var(--ink);
   padding: 12px 14px 16px;
 }
-/* sidebar blocks */
+
 .sblock{
   background: rgba(0,0,0,.18);
   border: 1px solid rgba(109,40,217,.20);
@@ -224,10 +226,10 @@ a{color:inherit;}
 }
 .save .n{font-size:11px;opacity:.9;color:#d7d7e2;}
 .save .v{font-weight:800;font-size:18px;color:#fff;}
-/* main tabs */
+
 .tabs{
   display:flex;
-  gap: 10px;
+  gap: 8px;
   padding: 10px 10px 8px;
   border-bottom: 1px solid var(--line);
   position: sticky;
@@ -239,7 +241,7 @@ a{color:inherit;}
 .tab{
   border: 0;
   background: transparent;
-  padding: 8px 12px;
+  padding: 11px 15px;
   border-radius: 10px;
   font-family: var(--serif);
   font-weight: 800;
@@ -255,7 +257,7 @@ a{color:inherit;}
 }
 .panel{padding: 14px 10px 6px;}
 .panel[hidden]{display:none !important;}
-/* make imported content blend in */
+
 .panel .answer, .panel .question{max-width: 100%;}
 .panel h1,.panel h2,.panel h3{color: var(--gold);}
 .panel{max-width:100%; overflow-wrap:anywhere;}
@@ -264,8 +266,8 @@ a{color:inherit;}
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
-  table-layout: fixed; /* prevents columns from pushing layout wider */
+  font-size: 15px;
+  table-layout: fixed;
 }
 .panel th, .panel td{
   border: 1px solid rgba(255,255,255,.14);
@@ -296,7 +298,7 @@ a{color:inherit;}
 .panel img, .panel svg, .panel video{max-width:100%; height:auto;}
 .panel pre{max-width:100%; overflow:auto;}
 
-/* responsive */
+
 @media (max-width: 980px){
   :root{--sidebar-w: 260px;}
 }
@@ -307,14 +309,14 @@ a{color:inherit;}
 }
 
 
-/* --- Fit content inside sheet (grid min-width fix + global table sizing) --- */
+
 .body > .main{min-width:0;}
 .main, .panel, .tabs, .tab-panel{min-width:0;}
-/* ensure ALL tables fit container */
+
 table{width:100%; max-width:100%; table-layout:fixed; border-collapse:collapse;}
 th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
 
-/* --- HP single value + tooltip --- */
+
 .hp-only .val{ font-size: 18px; line-height: 1; }
 .hpvalwrap{
   position: relative;
@@ -368,7 +370,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
   display:block;
   font-weight: 800;
   letter-spacing: .08em;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(232, 220, 255, .92);
 }
 .hp-tt-sep{
@@ -384,9 +386,9 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
   margin-top: 8px;
 }
 
-/* --- Foundry-like saves block (header + proficiency strip + value strip) --- */
+
 .foundry-saves{padding-top: 10px;}
-.foundry-saves .saves-grid{display:none;} /* legacy layout */
+.foundry-saves .saves-grid{display:none;}
 .foundry-saves .saves-row{
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -394,7 +396,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
 }
 .foundry-saves .sv-name{
   text-align:center;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: rgba(232,220,255,.92);
   padding: 0 2px 6px;
@@ -404,7 +406,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
   text-align:center;
   padding: 4px 0;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .06em;
   color: #fff;
@@ -484,7 +486,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
   .saves-grid{ grid-template-columns: 1fr; }
 }
 
-/* --- Saves value tooltip (Foundry-like breakdown on hover) --- */
+
 .foundry-saves .svtipwrap{
   position: relative;
   display: inline-flex;
@@ -505,7 +507,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
 
   
 
-  /* match HP / AC / Perception tooltip behavior */
+  
   min-width: 200px;
   max-width: 200px;
   width: auto;
@@ -526,8 +528,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
   pointer-events: none;
   z-index: 10000;
 }
-/* keep tooltips inside the sidebar width */
-/* removed: right-edge snapping for last save to avoid shifting left */
+
 .foundry-saves .svtipwrap:hover .sv-tooltip,
 .foundry-saves .svtipwrap:focus-within .sv-tooltip{
   opacity: 1;
@@ -555,7 +556,7 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
   text-transform: uppercase;
 }
 
-/* --- Character panel: image left, details right (Foundry-like) --- */
+
 .profile-row{
   display: flex;
   align-items: flex-start;
@@ -579,7 +580,54 @@ th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
 }
 .profile-row .profile-side br{display:none;}
 
-/* --- Actions tab: spacing between spoilers (details) like on "Персонаж" --- */
+
 .panel[data-panel='craft'] details{ margin: 0 0 12px; }
 .panel[data-panel='craft'] td details,
 .panel[data-panel='craft'] th details{ margin: 0; }
+
+
+/* ---- Global tooltip (fixed in <body>, not clipped by overflow) ---- */
+.g-tooltip{
+  position: fixed;
+  z-index: 999999;
+  max-width: 260px;
+  background: rgba(10, 10, 16, .98);
+  border: 1px solid rgba(160,120,255,.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,.55);
+  border-radius: 12px;
+  padding: 12px 14px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .12s ease, transform .12s ease;
+  pointer-events: none;
+}
+.g-tooltip.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+.g-tooltip::before{
+  content:'';
+  position:absolute;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: rgba(10,10,16,.98);
+  left: var(--arrow-x, 18px);
+}
+.g-tooltip[data-place="bottom"]::before{
+  top: -6px;
+  border-left: 1px solid rgba(160,120,255,.25);
+  border-top: 1px solid rgba(160,120,255,.25);
+}
+.g-tooltip[data-place="top"]::before{
+  bottom: -6px;
+  border-right: 1px solid rgba(160,120,255,.25);
+  border-bottom: 1px solid rgba(160,120,255,.25);
+}
+
+/* Disable embedded tooltips (we reuse their HTML as content for the global tooltip) */
+.hp-tooltip,
+.foundry-saves .sv-tooltip{
+  display: none !important;
+}
