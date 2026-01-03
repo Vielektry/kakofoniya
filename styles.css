@@ -1,0 +1,585 @@
+:root{
+  --bg-app: #0a0a10;
+  --bg-frame: #0f0f18;
+  --bg-sidebar: #151024;
+  --bg-sidebar-dark: #0f0b1a;
+  --bg-main: #0f1016;
+  --bg-main-2: #151726;
+  --ink: #e6e6ee;
+  --ink-soft: #c7c7d6;
+  --accent: #6d28d9;
+  --gold: #b7a6ff;
+  --line: rgba(255,255,255,0.10);
+  --shadow: rgba(0,0,0,0.65);
+  --shadow2: rgba(0,0,0,0.35);
+  --radius: 12px;
+  --radius-sm: 10px;
+  --sidebar-w: 300px;
+  --ui-font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+}
+*{box-sizing:border-box;}
+html,body{min-height:100%;}
+html{
+  min-height:100%;
+  background: radial-gradient(ellipse at 20% 15%, rgba(109,40,217,.22), transparent 55%),
+              radial-gradient(ellipse at 80% 85%, rgba(255,255,255,.06), transparent 55%),
+              var(--bg-app);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  background: transparent;
+  font-family: var(--ui-font);
+  color: #e9e2d7;
+}
+a{color:inherit;}
+/* outer frame */
+.app{
+  max-width: 920px;
+  margin: 18px auto;
+  padding: 10px;
+}
+.sheet{
+  border-radius: 18px;
+  box-shadow: 0 20px 60px var(--shadow);
+  border: 1px solid rgba(109,40,217,.22);
+  background: linear-gradient(180deg, rgba(0,0,0,.10), transparent);
+}
+/* top bar */
+.topbar{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, #1a1230, #0f0b1a);
+  border-bottom: 1px solid rgba(109,40,217,.22);
+}
+.brand{
+  display:flex;
+  align-items:baseline;
+  gap: 10px;
+  min-width: 220px;
+}
+.brand .logo{
+  font-family: var(--serif);
+  font-weight: 800;
+  letter-spacing: .5px;
+  font-size: 22px;
+  color: var(--gold);
+  text-shadow: 0 2px 0 rgba(0,0,0,.45);
+}
+.brand .sub{
+  font-size: 12px;
+  opacity: .9;
+}
+.charhead{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.charname{
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.badges{
+  display:flex;
+  gap: 6px;
+  flex-wrap:wrap;
+}
+.badge{
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.10);
+}
+.rightmeta{
+  transform: translateX(280px);
+}
+.level{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-size: 13px;
+  opacity: .95;
+}
+
+.level .shield{
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.18), transparent 55%), rgba(0,0,0,.25);
+  border: 1px solid rgba(109,40,217,.30);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--serif);
+  color: var(--gold);
+  gap: 2px;
+}
+
+.level .shield .lvl-label{
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: .06em;
+  opacity: .95;
+}
+
+.level .shield .lvl-num{
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1;
+}
+
+
+/* When sidebar is removed */
+.body.no-sidebar{
+  grid-template-columns: 1fr;
+}
+.body.no-sidebar .sidebar{
+  display:none;
+}
+
+/* Stats moved into content */
+.stats-area{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.6fr; /* 1й/2й/3й/4й блок */
+  gap: 18px;
+  margin: 18px 0 26px;
+}
+.stats-area .sblock{
+  margin-bottom: 0;
+}
+@media (max-width: 900px){
+  .stats-area{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Center short "empty" answers in tabs like Spells/Craft */
+.panel .answer{
+  max-width: 900px;
+  margin: 60px auto 0;
+}
+.sidebar{
+  background: linear-gradient(180deg, var(--bg-sidebar), var(--bg-sidebar-dark));
+  border-right: 1px solid rgba(109,40,217,.20);
+  padding: 12px;
+}
+.main{
+  background: radial-gradient(ellipse at 30% 20%, rgba(109,40,217,.12), transparent 60%),
+              linear-gradient(180deg, var(--bg-main), var(--bg-main-2));
+  color: var(--ink);
+  padding: 12px 14px 16px;
+}
+/* sidebar blocks */
+.sblock{
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(109,40,217,.20);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.sblock .stitle{
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .3px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.statbox{
+  background: rgba(0,0,0,.16);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 10px;
+  padding: 8px;
+  text-align:center;
+}
+.statbox .lbl{font-size: 11px; opacity:.9; color:#d7d7e2;}
+.statbox .val{font-family: var(--serif); font-size: 24px; font-weight: 800; color:#fff; text-shadow: 0 2px 0 rgba(0,0,0,.35);}
+.smallrow{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#d7d7e2;opacity:.95;}
+.savegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.save{
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.12);
+  text-align:center;
+}
+.save .n{font-size:11px;opacity:.9;color:#d7d7e2;}
+.save .v{font-weight:800;font-size:18px;color:#fff;}
+/* main tabs */
+.tabs{
+  display:flex;
+  gap: 10px;
+  padding: 10px 10px 8px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, rgba(15,16,22,.96), rgba(15,16,22,.86));
+  backdrop-filter: blur(6px);
+  z-index: 20;
+}
+.tab{
+  border: 0;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-family: var(--serif);
+  font-weight: 800;
+  color: var(--ink-soft);
+  cursor:pointer;
+  letter-spacing:.3px;
+}
+.tab:hover{background: rgba(109,40,217,.10); color: var(--gold);}
+.tab.active{
+  background: rgba(109,40,217,.14);
+  color: var(--accent);
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+.panel{padding: 14px 10px 6px;}
+.panel[hidden]{display:none !important;}
+/* make imported content blend in */
+.panel .answer, .panel .question{max-width: 100%;}
+.panel h1,.panel h2,.panel h3{color: var(--gold);}
+.panel{max-width:100%; overflow-wrap:anywhere;}
+
+.panel table{
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed; /* prevents columns from pushing layout wider */
+}
+.panel th, .panel td{
+  border: 1px solid rgba(255,255,255,.14);
+  padding: 8px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.panel th{
+  background: rgba(109,40,217,.12);
+  color: var(--ink);
+}
+.panel details{
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,.04);
+}
+.panel summary{cursor:pointer;font-weight:700;color:var(--ink);}
+.panel .bbImageWrapper img{
+  border-radius: 10px;
+  border: 2px solid rgba(109,40,217,.35);
+  box-shadow: 0 10px 26px var(--shadow2);
+}
+
+.panel img{max-width:100%;height:auto;}
+
+.panel img, .panel svg, .panel video{max-width:100%; height:auto;}
+.panel pre{max-width:100%; overflow:auto;}
+
+/* responsive */
+@media (max-width: 980px){
+  :root{--sidebar-w: 260px;}
+}
+@media (max-width: 820px){
+  .body{grid-template-columns: 1fr;}
+  .sidebar{order:2;}
+  .main{order:1;}
+}
+
+
+/* --- Fit content inside sheet (grid min-width fix + global table sizing) --- */
+.body > .main{min-width:0;}
+.main, .panel, .tabs, .tab-panel{min-width:0;}
+/* ensure ALL tables fit container */
+table{width:100%; max-width:100%; table-layout:fixed; border-collapse:collapse;}
+th, td{overflow-wrap:anywhere; word-break:break-word; white-space:normal;}
+
+/* --- HP single value + tooltip --- */
+.hp-only .val{ font-size: 18px; line-height: 1; }
+.hpvalwrap{
+  position: relative;
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 8px;
+  cursor: help;
+  outline: none;
+}
+.hpvalwrap:focus-visible{
+  box-shadow: 0 0 0 2px rgba(160,120,255,.35);
+}
+.hp-tooltip{
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  min-width: 200px;
+  max-width: 260px;
+
+  background: rgba(10, 10, 16, .98);
+  border: 1px solid rgba(160,120,255,.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,.55);
+  border-radius: 12px;
+  padding: 12px 14px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .12s ease, transform .12s ease;
+  pointer-events: none;
+  z-index: 9999;
+}
+.hpvalwrap:hover .hp-tooltip,
+.hpvalwrap:focus-within .hp-tooltip{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.hp-tooltip::before{
+  content:'';
+  position:absolute;
+  left: 18px;
+  top: -7px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: rgba(10,10,16,.98);
+  border-left: 1px solid rgba(160,120,255,.25);
+  border-top: 1px solid rgba(160,120,255,.25);
+}
+.hp-tt-title{
+  display:block;
+  font-weight: 800;
+  letter-spacing: .08em;
+  font-size: 12px;
+  color: rgba(232, 220, 255, .92);
+}
+.hp-tt-sep{
+  display:block;
+  height: 1px;
+  margin: 10px 0 8px;
+  background: linear-gradient(90deg, rgba(160,120,255,.35), rgba(160,120,255,.05));
+}
+.saves-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* --- Foundry-like saves block (header + proficiency strip + value strip) --- */
+.foundry-saves{padding-top: 10px;}
+.foundry-saves .saves-grid{display:none;} /* legacy layout */
+.foundry-saves .saves-row{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+}
+.foundry-saves .sv-name{
+  text-align:center;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(232,220,255,.92);
+  padding: 0 2px 6px;
+}
+.foundry-saves .sv-prof{
+  display:block;
+  text-align:center;
+  padding: 4px 0;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+}
+.foundry-saves .sv-prof.expert{
+  background: linear-gradient(180deg, rgba(126,70,200,.92), rgba(92,48,150,.88));
+}
+.foundry-saves .sv-prof.master{
+  background: linear-gradient(180deg, rgba(220,160,64,.92), rgba(154,105,22,.88));
+}
+.foundry-saves .saves-values{
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+.foundry-saves .sv-val{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 6px;
+  font-weight: 900;
+  font-size: 16px;
+  color: #fff;
+}
+.foundry-saves .sv-icon{
+  width: 14px;
+  height: 14px;
+  display:inline-block;
+  transform: rotate(45deg);
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 2px;
+  position: relative;
+  background: rgba(0,0,0,.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.foundry-saves .sv-icon::after{
+  content:'';
+  position:absolute;
+  inset: 3px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 1px;
+}
+
+@media (max-width: 980px){
+  .foundry-saves .saves-row{ grid-template-columns: 1fr; }
+  .foundry-saves .sv-name{ text-align:left; padding-left: 6px; }
+  .foundry-saves .sv-val{ justify-content:flex-start; padding-left: 6px; }
+}
+.hp-tt-row{
+  display:grid;
+  grid-template-columns: 56px 1fr;
+  gap: 6px 10px;
+  padding: 8px 0;
+}
+.hp-tt-row + .hp-tt-row{
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.hp-tt-num{
+  grid-row: 1 / span 2;
+  font-weight: 800;
+  font-size: 18px;
+  color: rgba(232, 220, 255, .95);
+}
+.hp-tt-main{
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(232, 220, 255, .9);
+}
+.hp-tt-sub{
+  font-size: 12px;
+  color: rgba(232, 220, 255, .6);
+}
+
+@media (max-width: 980px){
+  .saves-grid{ grid-template-columns: 1fr; }
+}
+
+/* --- Saves value tooltip (Foundry-like breakdown on hover) --- */
+.foundry-saves .svtipwrap{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  cursor: help;
+  outline: none;
+}
+.foundry-saves .svtipwrap:focus-visible{
+  box-shadow: 0 0 0 2px rgba(160,120,255,.35);
+}
+.foundry-saves .sv-tooltip{
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+
+  
+
+  /* match HP / AC / Perception tooltip behavior */
+  min-width: 200px;
+  max-width: 200px;
+  width: auto;
+
+  max-height: 260px;
+  overflow: visible;
+  overscroll-behavior: contain;
+
+  background: rgba(10, 10, 16, .98);
+  border: 1px solid rgba(160,120,255,.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,.55);
+  border-radius: 12px;
+  padding: 12px 14px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .12s ease, transform .12s ease;
+  pointer-events: none;
+  z-index: 10000;
+}
+/* keep tooltips inside the sidebar width */
+/* removed: right-edge snapping for last save to avoid shifting left */
+.foundry-saves .svtipwrap:hover .sv-tooltip,
+.foundry-saves .svtipwrap:focus-within .sv-tooltip{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.foundry-saves .sv-tooltip::before{
+  content:'';
+  position:absolute;
+  left: 18px;
+  top: -7px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: rgba(10,10,16,.98);
+  border-left: 1px solid rgba(160,120,255,.25);
+  border-top: 1px solid rgba(160,120,255,.25);
+}
+.foundry-saves .sv-tt-title{
+  display:block;
+  font-weight: 900;
+  letter-spacing: .06em;
+  font-size: 12px;
+  color: rgba(232, 220, 255, .92);
+  text-transform: uppercase;
+}
+
+/* --- Character panel: image left, details right (Foundry-like) --- */
+.profile-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.profile-row .bbImageWrapper{
+  float: none !important;
+  margin: 0 !important;
+  flex: 0 0 auto;
+}
+.profile-row .bbImageWrapper img{
+  display:block;
+}
+.profile-row .profile-side{
+  flex: 1 1 360px;
+  min-width: 260px;
+}
+.profile-row .profile-side details{
+  margin: 0 0 12px;
+}
+.profile-row .profile-side br{display:none;}
+
+/* --- Actions tab: spacing between spoilers (details) like on "Персонаж" --- */
+.panel[data-panel='craft'] details{ margin: 0 0 12px; }
+.panel[data-panel='craft'] td details,
+.panel[data-panel='craft'] th details{ margin: 0; }
